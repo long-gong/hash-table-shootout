@@ -1,0 +1,21 @@
+language: c++
+sudo: false
+matrix:
+  fast_finish: true
+  include:
+    - name: Ubuntu 18.04 gcc
+      os: linux
+      dist: bionic
+      compiler: gcc
+      env: CXX="g++" CC="gcc" BUILD_TYPE=release
+    - name: Ubuntu 18.04 clang
+      os: linux
+      dist: bionic
+      compiler: clang
+      env: CXX="clang++" CC="clang" BUILD_TYPE=release
+
+before_install:
+  - chmod +x ./before_install.sh && ./before_install.sh
+
+script:
+  - make CXX=$CXX -j4 VERBOSE=1

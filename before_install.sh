@@ -22,13 +22,13 @@ sudo apt-get install \
     pkg-config \
     libunwind-dev
 
-cd /tmp
-wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz
-tar -zxvf boost_1_71_0.tar.gz
-cd boost_1_71_0
-./bootstrap.sh && ./b2 install
-cd /tmp 
-rm -rf boost_1_71_0*
+# cd /tmp
+# wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz
+# tar -zxvf boost_1_71_0.tar.gz
+# cd boost_1_71_0
+# ./bootstrap.sh && ./b2 install
+# cd /tmp 
+# rm -rf boost_1_71_0*
 
 git clone https://github.com/fmtlib/fmt.git && cd fmt
 
