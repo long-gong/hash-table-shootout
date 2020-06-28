@@ -25,7 +25,8 @@ sudo apt-get install \
     libjemalloc-dev \
     libssl-dev \
     pkg-config \
-    libunwind-dev
+    libunwind-dev \
+    qt5-defaut
 
 # cd /tmp
 # wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz

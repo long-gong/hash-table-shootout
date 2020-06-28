@@ -9,7 +9,7 @@ all: pre_build main_build
 pre_build:
 	@mkdir -p build 
 
-main_build: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map build/tsl_array_map build/tsl_array_map_mlf_1_0
+main_build: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map build/tsl_array_map build/tsl_array_map_mlf_1_0 build/folly_f14fastmap
 	@echo Completed
 
 
@@ -83,3 +83,5 @@ build/tsl_array_map_mlf_1_0: src/tsl_array_map_mlf_1_0.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -std=c++17 -Iarray-hash/include -o build/tsl_array_map_mlf_1_0 src/tsl_array_map_mlf_1_0.cc
 
 
+build/folly_f14fastmap: src/folly_f14fastmap.cc src/template.c
+	$(CXX) -O3 -std=c++14 -DNDEBUG -o $@  src/folly_f14fastmap.cc -lfolly -ldouble-conversion -lglog
