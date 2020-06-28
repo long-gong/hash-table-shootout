@@ -1,0 +1,27 @@
+[submodule "array-hash"]
+	path = array-hash
+	url = https://github.com/Tessil/array-hash.git
+[submodule "emilib"]
+	path = emilib
+	url = https://github.com/emilk/emilib.git
+[submodule "flat_hash_map"]
+	path = flat_hash_map
+	url = https://github.com/skarupke/flat_hash_map.git
+[submodule "hopscotch-map"]
+	path = hopscotch-map
+	url = https://github.com/Tessil/hopscotch-map.git
+[submodule "ordered-map"]
+	path = ordered-map
+	url = https://github.com/Tessil/ordered-map.git
+[submodule "robin-map"]
+	path = robin-map
+	url = https://github.com/Tessil/robin-map.git
+[submodule "sparse"]
+	path = sparse
+	url = https://github.com/Tessil/sparse-map.git
+[submodule "sparse-map"]
+	path = sparse-map
+	url = https://github.com/Tessil/sparse-map.git
+[submodule "sparsepp"]
+	path = sparsepp
+	url = https://github.com/greg7mdp/sparsepp.git

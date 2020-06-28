@@ -70,7 +70,7 @@ for nkeys in range(minkeys, maxkeys + 1, interval):
                     memory_usage_bytes = int(words[1])
                     load_factor = float(words[2])
                 except:
-                    print("Error with %s" % str(['./build/' + program, str(nkeys), benchtype]))
+                    print(("Error with %s" % str(['./build/' + program, str(nkeys), benchtype])))
                     break
 
                 line = ','.join(map(str, [benchtype, nkeys, program, "%0.2f" % load_factor, 
@@ -81,9 +81,9 @@ for nkeys in range(minkeys, maxkeys + 1, interval):
                     fastest_attempt_data = line
 
             if fastest_attempt != 1000000:
-                print >> outfile, fastest_attempt_data
-                print fastest_attempt_data
+                print(fastest_attempt_data, file=outfile)
+                print(fastest_attempt_data)
         
         # Print blank line
-        print >> outfile
-        print 
+        print(file=outfile)
+        print() 

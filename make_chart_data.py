@@ -98,6 +98,6 @@ for i, (benchtype, programs) in enumerate(by_benchtype.items()):
 
 json_text = json.dumps(chart_data)
 json_text = json_text.replace("}], ", "}], \n")
-print('chart_data = ' + json_text + ';')
-print('\nprograms = ' + json.dumps(proper_names, indent=1) + ';')
-print('\ndefault_programs_show = ' + str(default_programs_show) + ';')
+print(('chart_data = ' + json_text + ';'))
+print(('\nprograms = ' + json.dumps(proper_names, indent=1) + ';'))
+print(('\ndefault_programs_show = ' + str(default_programs_show) + ';'))

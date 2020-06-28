@@ -1,3 +1,9 @@
 build
 output
 charts.html
+
+*.bak
+.clang-format
+.vscode
+.idea
+cmake-*
