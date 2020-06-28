@@ -2,6 +2,9 @@
 
 set -e 
 
+
+git submodule update --init --recursive
+
 sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get install \
@@ -61,5 +64,4 @@ sudo make install
 cd /tmp 
 rm -rf sparsehash
 
-git submodule update --init --recursive
 
