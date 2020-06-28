@@ -43,7 +43,7 @@ sudo make install
 
 wget https://github.com/facebook/folly/archive/v2020.06.15.00.tar.gz
 tar -zxvf v2020.06.15.00.tar.gz
-cd folly-2020.06.15.00/_build 
+cd folly-2020.06.15.00/build 
 cmake ..
 make -j$(nproc)
 sudo make install
