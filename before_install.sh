@@ -2,6 +2,8 @@
 
 set -e 
 
+sudo add-apt-repository universe
+sudo apt-get update
 sudo apt-get install \
     g++ \
     cmake \
