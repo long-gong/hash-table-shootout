@@ -50,7 +50,9 @@ rm -rf v2.2.2.tar.gz gflags-2.2.2
 rm -rf glog
 git clone https://github.com/google/glog.git
 cd glog 
-./autogen.sh && ./configure && make && sudo make install
+# ./autogen.sh && ./configure && make && sudo make install
+mkdir build && cd build
+cmake ..
 cd /tmp 
 rm -rf glog
 
