@@ -20,13 +20,14 @@ output: main_build bench.py
 	@pip3 install --user click
 	python3 ./bench.py 
 
-charts.html: output mark_chart_data.py make_html.py 
+index.html: output mark_chart_data.py make_html.py 
 	python3 make_chart_data.py < output | python3 make_html.py 
+	cp charts.html index.html
 
 benchmark: output 
 	@echo Completed
 
-html: charts.html 
+html: index.html 
 	@echo Completed
 
 build/std_unordered_map: src/std_unordered_map.cc src/template.c
