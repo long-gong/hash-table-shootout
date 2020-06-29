@@ -26,7 +26,8 @@ sudo apt-get install \
     libssl-dev \
     pkg-config \
     libunwind-dev \
-    qt5-default
+    pkg-config \
+    qt5-default 
 
 # cd /tmp
 # wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz
