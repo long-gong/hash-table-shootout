@@ -20,7 +20,7 @@ output: main_build bench.py
 	python3 ./bench.py 
 
 charts.html: output mark_chart_data.py make_html.py 
-	python3 mark_chart_data.py < output | python3 make_html.py 
+	python3 make_chart_data.py < output | python3 make_html.py 
 
 benchmark: output 
 	@echo Completed
@@ -44,7 +44,7 @@ build/google_dense_hash_map_mlf_0_9: src/google_dense_hash_map_mlf_0_9.cc src/te
 	$(CXX) $(CXX_FLAGS) -lm -o build/google_dense_hash_map_mlf_0_9 src/google_dense_hash_map_mlf_0_9.cc
 
 build/qt_qhash: src/qt_qhash.cc src/template.c
-	$(CXX) $(CXX_FLAGS) -lm -fPIC $(Qt5_CFLAGS) -o build/qt_qhash src/qt_qhash.cc $(Qt5_LDLAGS)
+	$(CXX) $(CXX_FLAGS) -lm -fPIC $(Qt5_CFLAGS) -o build/qt_qhash src/qt_qhash.cc $(Qt5_LDFLAGS)
 
 build/spp_sparse_hash_map: src/spp_sparse_hash_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -Isparsepp -o build/spp_sparse_hash_map src/spp_sparse_hash_map.cc
