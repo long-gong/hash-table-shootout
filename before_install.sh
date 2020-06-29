@@ -7,7 +7,7 @@ git submodule update --init --recursive
 
 sudo add-apt-repository universe
 sudo apt-get update
-sudo apt-get install \
+sudo apt-get install -y \
     g++ \
     cmake \
     libboost-all-dev \
@@ -29,23 +29,15 @@ sudo apt-get install \
     pkg-config \
     qt5-default 
 
-# cd /tmp
-# wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz
-# tar -zxvf boost_1_71_0.tar.gz
-# cd boost_1_71_0
-# ./bootstrap.sh && ./b2 install
-# cd /tmp 
-# rm -rf boost_1_71_0*
-
+cd /tmp
+rm -rf fmt
 git clone https://github.com/fmtlib/fmt.git && cd fmt
-
 mkdir _build && cd _build
 cmake .. -DFMT_TEST=Off
-
 make -j$(nproc)
 sudo make install
 
-
+cd /tmp
 wget https://github.com/facebook/folly/archive/v2020.06.15.00.tar.gz
 tar -zxvf v2020.06.15.00.tar.gz
 cd folly-2020.06.15.00/build 
@@ -65,5 +57,13 @@ make -j$(nproc)
 sudo make install 
 cd /tmp 
 rm -rf sparsehash
+
+# cd /tmp 
+# rm -rf glog
+# git clone https://github.com/google/glog.git
+# cd glog 
+# ./autogen.sh && ./configure && make && sudo make install
+# cd /tmp 
+# rm -rf glog
 
 
