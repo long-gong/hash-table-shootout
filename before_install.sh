@@ -28,7 +28,8 @@ sudo apt-get install -y \
     pkg-config \
     libunwind-dev \
     pkg-config \
-    qt5-default 
+    qt5-default \
+    wget
 
 cd /tmp 
 wget https://github.com/gflags/gflags/archive/v2.2.2.tar.gz
@@ -40,12 +41,18 @@ make -j$(nproc) && sudo make install
 cd /tmp 
 rm -rf v2.2.2.tar.gz gflags-2.2.2
 
-wget https://github.com/google/glog/archive/v0.4.0.tar.gz
-tar -zxvf v0.4.0.tar.gz
-cd glog-0.4.0
+# wget https://github.com/google/glog/archive/v0.4.0.tar.gz
+# tar -zxvf v0.4.0.tar.gz
+# cd glog-0.4.0
+# ./autogen.sh && ./configure && make && sudo make install
+# cd /tmp 
+# rm -rf v0.4.0.tar.gz glog-0.4.0
+rm -rf glog
+git clone https://github.com/google/glog.git
+cd glog 
 ./autogen.sh && ./configure && make && sudo make install
 cd /tmp 
-rm -rf v0.4.0.tar.gz glog-0.4.0
+rm -rf glog
 
 cd /tmp
 rm -rf fmt
@@ -59,7 +66,8 @@ cd /tmp
 wget https://github.com/facebook/folly/archive/v2020.06.15.00.tar.gz
 tar -zxvf v2020.06.15.00.tar.gz
 cd folly-2020.06.15.00/build 
-cmake ..
+cmake .. -DCMAKE_INCLUDE_PATH=/usr/local/include \
+  -DCMAKE_LIBRARY_PATH=/usr/local/lib
 make -j$(nproc)
 sudo make install
 
