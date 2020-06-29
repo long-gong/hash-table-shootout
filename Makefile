@@ -1,6 +1,7 @@
 CXX=clang++
 CXX_FLAGS=-O3 -march=native -std=c++14 -DNDEBUG
-Qt5_FLAGS := $(shell pkg-config --cflags --libs Qt5Core)
+Qt5_CFLAGS := $(shell pkg-config --cflags Qt5Core)
+Qt5_LDFLAGS := $(shell pkg-config --libs Qt5Core)
 RM=rm -rf 
 
 .PHONY: all clean pre_build benchmark html clean
@@ -43,7 +44,7 @@ build/google_dense_hash_map_mlf_0_9: src/google_dense_hash_map_mlf_0_9.cc src/te
 	$(CXX) $(CXX_FLAGS) -lm -o build/google_dense_hash_map_mlf_0_9 src/google_dense_hash_map_mlf_0_9.cc
 
 build/qt_qhash: src/qt_qhash.cc src/template.c
-	$(CXX) $(CXX_FLAGS) -lm -fPIC $(Qt5_FLAGS) -o build/qt_qhash src/qt_qhash.cc
+	$(CXX) $(CXX_FLAGS) -lm -fPIC $(Qt5_CFLAGS) -o build/qt_qhash src/qt_qhash.cc $(Qt5_LDLAGS)
 
 build/spp_sparse_hash_map: src/spp_sparse_hash_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -Isparsepp -o build/spp_sparse_hash_map src/spp_sparse_hash_map.cc
