@@ -10,7 +10,11 @@ RUN cd /tmp && \
     cd hash-table-shootout && \
     chmod +x ./before_install.sh && \
     ./before_install.sh && \
-    make && make html && \
+    make 
+    
+RUN export LC_ALL=C.UTF-8 && \
+    export LANG=C.UTF-8 && \
+    make html && \
     mv index.html /var/www/html/
 
 EXPOSE 80

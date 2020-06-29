@@ -78,6 +78,10 @@ def cli(benchtypes, programs, output):
     elif 'all' in programs:
         programs = ALL_PROGRAMS
 
+    print('benchtypes: %s' % (';'.join(benchtypes)))
+    print('programs: %s' % (';'.join(programs)))
+    print('\n\n')
+
     with open(output, 'w') as outfile:
         for nkeys in range(minkeys, maxkeys + 1, interval):
             for benchtype in benchtypes:
