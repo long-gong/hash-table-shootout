@@ -53,6 +53,7 @@ cd glog
 # ./autogen.sh && ./configure && make && sudo make install
 mkdir build && cd build
 cmake ..
+make -j$(nproc) && sudo make install
 cd /tmp 
 rm -rf glog
 
