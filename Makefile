@@ -99,7 +99,7 @@ build/tsl_array_map_mlf_1_0: src/tsl_array_map_mlf_1_0.cc src/template.c
 
 
 build/folly_f14fastmap: src/folly_f14fastmap.cc src/template.c
-	$(CXX) -O3 -std=c++14 -DNDEBUG -o $@  src/folly_f14fastmap.cc -lfolly -lglog -lgflags -lpthread  -ldouble-conversion -lboost_program_options -lboost_filesystem -lboost_system
+	$(CXX) -O3 -std=c++14 -DNDEBUG -o $@  src/folly_f14fastmap.cc -lfolly -lglog -lunwind -lgflags -lpthread  -ldouble-conversion -lboost_program_options -lboost_filesystem -lboost_system
 
 
 clean:
