@@ -71,9 +71,9 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h','--help'])
 @click.option('-o','--output', type=click.Path(exists=False), help="output filename", default='output')
 def cli(benchtypes, programs, output):
     """Command line tools for HashTable Shootot"""
-    if benchtypes is None:
+    if (benchtypes is None) or (len(benchtypes) == 0):
         benchtypes = ALL_BENCHTYPES
-    if programs is None:
+    if (programs is None) or (len(programs) == 0):
         programs = DEFAULT_PROGRAMS
     elif 'all' in programs:
         programs = ALL_PROGRAMS

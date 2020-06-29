@@ -20,7 +20,7 @@ output: main_build bench.py
 	@pip3 install --user click
 	python3 ./bench.py 
 
-index.html: output mark_chart_data.py make_html.py 
+index.html: output make_chart_data.py make_html.py 
 	python3 make_chart_data.py < output | python3 make_html.py 
 	cp charts.html index.html
 
