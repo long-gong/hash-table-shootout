@@ -15,27 +15,14 @@ make -j$(nproc)
 ## Run
 
 ```bash
-$ python3 bench.py
-$ python3 make_chart_data.py < output | python3 make_html.py
+make html
 ```
 
-Your charts are now in `charts.html`.
-
-You can tweak some of the values in bench.py to make it run faster at the
-expense of less granular data, and you might need to tweak some of the tickSize
-settings in charts-template.html.
-
-To run the benchmark at the highest priority possible, do this:
-
-    $ sudo nice -n-20 ionice -c1 -n0 sudo -u $USER python bench.py
-
-You might also want to disable any swap files/partitions so that swapping
-doesn't influence performance.  (The programs will just die if they try to
-allocate too much memory.)
+Your charts are now in `charts.html`. Note that running this benchmark takes long time (as long as a few hours or even more).
 
 
-Copyright Information
-=====================
+## Copyright Information
+
 
 Written by Nick Welch in 2010.  
 Forked by Tessil in 2016.  

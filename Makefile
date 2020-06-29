@@ -1,17 +1,34 @@
 CXX=clang++
 CXX_FLAGS=-O3 -march=native -std=c++14 -DNDEBUG
+Qt5_FLAGS := pkg-config --cflags --libs Qt5Core
+RM=rm -rf 
 
-.PHONY: all clean pre_build
+.PHONY: all clean pre_build post_build benchmark html clean
 .SECONDARY: main_build
 
-all: pre_build main_build
+all: pre_build main_build post_build
 
 pre_build:
 	@mkdir -p build 
+	@echo Completed
 
 main_build: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map build/tsl_array_map build/tsl_array_map_mlf_1_0 build/folly_f14fastmap
 	@echo Completed
 
+post_build: charts.html 
+	@echo Completed
+
+output: main_build bench.py 
+	python3 ./bench.py 
+
+charts.html: output mark_chart_data.py make_html.py 
+	python3 mark_chart_data.py < output | python3 make_html.py 
+
+benchmark: output 
+	@echo Completed
+
+html: charts.html 
+	@echo Completed
 
 build/std_unordered_map: src/std_unordered_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -lm -o build/std_unordered_map src/std_unordered_map.cc
@@ -29,7 +46,7 @@ build/google_dense_hash_map_mlf_0_9: src/google_dense_hash_map_mlf_0_9.cc src/te
 	$(CXX) $(CXX_FLAGS) -lm -o build/google_dense_hash_map_mlf_0_9 src/google_dense_hash_map_mlf_0_9.cc
 
 build/qt_qhash: src/qt_qhash.cc src/template.c
-	$(CXX) $(CXX_FLAGS) -lm -fPIC `pkg-config --cflags --libs Qt5Core` -o build/qt_qhash src/qt_qhash.cc
+	$(CXX) $(CXX_FLAGS) -lm -fPIC $(Qt5_FLAGS) -o build/qt_qhash src/qt_qhash.cc
 
 build/spp_sparse_hash_map: src/spp_sparse_hash_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -Isparsepp -o build/spp_sparse_hash_map src/spp_sparse_hash_map.cc
@@ -85,3 +102,7 @@ build/tsl_array_map_mlf_1_0: src/tsl_array_map_mlf_1_0.cc src/template.c
 
 build/folly_f14fastmap: src/folly_f14fastmap.cc src/template.c
 	$(CXX) -O3 -std=c++14 -DNDEBUG -o $@  src/folly_f14fastmap.cc -lfolly -ldouble-conversion -lglog
+
+
+clean:
+	$(RM) build

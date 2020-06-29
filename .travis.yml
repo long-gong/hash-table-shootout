@@ -18,4 +18,4 @@ before_install:
   - chmod +x ./before_install.sh && ./before_install.sh
 
 script:
-  - make CXX=$CXX -j4 VERBOSE=1
+  - make CXX=$CXX -j4
