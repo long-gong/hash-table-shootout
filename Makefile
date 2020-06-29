@@ -1,6 +1,6 @@
 CXX=clang++
 CXX_FLAGS=-O3 -march=native -std=c++14 -DNDEBUG
-Qt5_FLAGS := pkg-config --cflags --libs Qt5Core
+Qt5_FLAGS := $(pkg-config --cflags --libs Qt5Core)
 RM=rm -rf 
 
 .PHONY: all clean pre_build post_build benchmark html clean
