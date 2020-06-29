@@ -21,6 +21,9 @@ make html
 Your charts are now in `charts.html`. Note that running this benchmark takes long time (as long as a few hours or even more).
 
 
+Here are some [sample results](https://long-gong.github.io/hash-table-shootout/).
+
+
 ## Copyright Information
 
 
