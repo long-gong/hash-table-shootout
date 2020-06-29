@@ -1,7 +1,10 @@
 build
 output
 charts.html
+index.html 
+*.js
 
+*.OLD
 *.bak
 .clang-format
 .vscode
