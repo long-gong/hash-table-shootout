@@ -1,4 +1,4 @@
-CXX=clang++
+CXX=g++
 CXX_FLAGS=-O3 -march=native -std=c++14 -DNDEBUG
 Qt5_CFLAGS := $(shell pkg-config --cflags Qt5Core)
 Qt5_LDFLAGS := $(shell pkg-config --libs Qt5Core)
