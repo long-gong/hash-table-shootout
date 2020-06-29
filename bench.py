@@ -1,6 +1,7 @@
 import sys, os, subprocess, signal
+import click 
 
-programs = [
+ALL_PROGRAMS = [
     "std_unordered_map",
     "boost_unordered_map",
     "google_sparse_hash_map",
@@ -25,17 +26,15 @@ programs = [
     "folly_f14fastmap",
 ]
 
-minkeys = 2 * 100 * 1000
-maxkeys = 30 * 100 * 1000
-interval = 2 * 100 * 1000
-best_out_of = 5
+DEFAULT_PROGRAMS = [
+    "google_dense_hash_map",
+    "tsl_hopscotch_map_store_hash",
+    "tsl_robin_map_store_hash",
+    "tsl_ordered_map",
+    "folly_f14fastmap",
+]
 
-outfile = open("output", "w")
-
-if len(sys.argv) > 1:
-    benchtypes = sys.argv[1:]
-else:
-    benchtypes = (
+ALL_BENCHTYPES = [
         "insert_random_shuffle_range",
         "read_random_shuffle_range",
         "insert_random_full",
@@ -56,60 +55,84 @@ else:
         "read_string",
         "read_miss_string",
         "read_string_after_delete",
-        "delete_string",
-    )
+        "delete_string",    
+]
 
+minkeys = 2 * 100 * 1000
+maxkeys = 30 * 100 * 1000
+interval = 2 * 100 * 1000
+best_out_of = 5
 
-for nkeys in range(minkeys, maxkeys + 1, interval):
-    for benchtype in benchtypes:
-        for program in programs:
-            if program.startswith("tsl_array_map") and "string" not in benchtype:
-                continue
+CONTEXT_SETTINGS = dict(help_option_names=['-h','--help'])
 
-            fastest_attempt = 1000000
-            fastest_attempt_data = ""
+@click.command(context_settings=CONTEXT_SETTINGS)
+@click.option('-b', '--benchtypes', type=click.Choice(ALL_BENCHTYPES), help="benchmark types", multiple=True)
+@click.option('-p', '--programs', type=click.Choice(ALL_PROGRAMS + ['all']), help="programs to be benchmarked", multiple=True)
+@click.option('-o','--output', type=click.Path(exists=False), help="output filename", default='output')
+def cli(benchtypes, programs, output):
+    """Command line tools for HashTable Shootot"""
+    if benchtypes is None:
+        benchtypes = ALL_BENCHTYPES
+    if programs is None:
+        programs = DEFAULT_PROGRAMS
+    elif 'all' in programs:
+        programs = ALL_PROGRAMS
 
-            for attempt in range(best_out_of):
-                try:
-                    output = subprocess.check_output(
-                        ["./build/" + program, str(nkeys), benchtype]
-                    )
-                    words = output.strip().split()
+    with open(output, 'w') as outfile:
+        for nkeys in range(minkeys, maxkeys + 1, interval):
+            for benchtype in benchtypes:
+                for program in programs:
+                    if program.startswith("tsl_array_map") and "string" not in benchtype:
+                        continue
 
-                    runtime_seconds = float(words[0])
-                    memory_usage_bytes = int(words[1])
-                    load_factor = float(words[2])
-                except:
-                    print(
-                        (
-                            "Error with %s"
-                            % str(["./build/" + program, str(nkeys), benchtype])
+                    fastest_attempt = 1000000
+                    fastest_attempt_data = ""
+
+                    for attempt in range(best_out_of):
+                        try:
+                            output = subprocess.check_output(
+                                ["./build/" + program, str(nkeys), benchtype]
+                            )
+                            words = output.strip().split()
+
+                            runtime_seconds = float(words[0])
+                            memory_usage_bytes = int(words[1])
+                            load_factor = float(words[2])
+                        except:
+                            print(
+                                (
+                                    "Error with %s"
+                                    % str(["./build/" + program, str(nkeys), benchtype])
+                                )
+                            )
+                            break
+
+                        line = ",".join(
+                            map(
+                                str,
+                                [
+                                    benchtype,
+                                    nkeys,
+                                    program,
+                                    "%0.2f" % load_factor,
+                                    memory_usage_bytes,
+                                    "%0.6f" % runtime_seconds,
+                                ],
+                            )
                         )
-                    )
-                    break
 
-                line = ",".join(
-                    map(
-                        str,
-                        [
-                            benchtype,
-                            nkeys,
-                            program,
-                            "%0.2f" % load_factor,
-                            memory_usage_bytes,
-                            "%0.6f" % runtime_seconds,
-                        ],
-                    )
-                )
+                        if runtime_seconds < fastest_attempt:
+                            fastest_attempt = runtime_seconds
+                            fastest_attempt_data = line
 
-                if runtime_seconds < fastest_attempt:
-                    fastest_attempt = runtime_seconds
-                    fastest_attempt_data = line
+                    if fastest_attempt != 1000000:
+                        print(fastest_attempt_data, file=outfile)
+                        print(fastest_attempt_data)
 
-            if fastest_attempt != 1000000:
-                print(fastest_attempt_data, file=outfile)
-                print(fastest_attempt_data)
+                # Print blank line
+                print(file=outfile)
+                print()
 
-        # Print blank line
-        print(file=outfile)
-        print()
+
+if __name__ == "__main__":
+    cli()

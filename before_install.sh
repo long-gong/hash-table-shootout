@@ -29,7 +29,9 @@ sudo apt-get install -y \
     libunwind-dev \
     pkg-config \
     qt5-default \
-    wget
+    wget \
+    python3 \
+    python3-pip 
 
 cd /tmp 
 wget https://github.com/gflags/gflags/archive/v2.2.2.tar.gz
@@ -41,16 +43,9 @@ make -j$(nproc) && sudo make install
 cd /tmp 
 rm -rf v2.2.2.tar.gz gflags-2.2.2
 
-# wget https://github.com/google/glog/archive/v0.4.0.tar.gz
-# tar -zxvf v0.4.0.tar.gz
-# cd glog-0.4.0
-# ./autogen.sh && ./configure && make && sudo make install
-# cd /tmp 
-# rm -rf v0.4.0.tar.gz glog-0.4.0
 rm -rf glog
 git clone https://github.com/google/glog.git
 cd glog 
-# ./autogen.sh && ./configure && make && sudo make install
 mkdir build && cd build
 cmake ..
 make -j$(nproc) && sudo make install

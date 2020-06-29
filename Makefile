@@ -17,6 +17,7 @@ main_build: build/std_unordered_map build/boost_unordered_map build/google_spars
 	@echo Completed
 
 output: main_build bench.py 
+	@pip3 install --user click
 	python3 ./bench.py 
 
 charts.html: output mark_chart_data.py make_html.py 
