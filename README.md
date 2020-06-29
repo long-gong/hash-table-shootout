@@ -4,17 +4,12 @@
 
 [hash-table-shootout](https://github.com/long-gong/hash-table-shootout) is a benchmark of some prominent C/C++ hash table implementations.
 
-## Build
+## Build and Run
 
 ```bash
 chmod +x ./before_install.sh
 ./before_install.sh
 make -j$(nproc)
-```
-
-## Run
-
-```bash
 make html
 ```
 
