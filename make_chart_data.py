@@ -50,6 +50,7 @@ proper_names = OrderedDict(
         ("emilib_hash_map", "emilib::HashMap"),
         ("tsl_array_map", "tsl::array_map"),
         ("tsl_array_map_mlf_1_0", "tsl::array_map (1.0 mlf)"),
+        ("folly_f14fastmap", "folly::F14FastMap"),
     ]
 )
 
@@ -77,18 +78,25 @@ program_slugs = [
     "emilib_hash_map",
     "tsl_array_map",
     "tsl_array_map_mlf_1_0",
+    "folly_f14fastmap",
 ]
 
 # hashmap which will be shown (checkbox checked)
 default_programs_show = [
-    "std_unordered_map",
+    # "std_unordered_map",
+    # "google_dense_hash_map",
+    # "qt_qhash",
+    # "tsl_sparse_map",
+    # "tsl_hopscotch_map",
+    # "tsl_robin_map",
+    # "tsl_hopscotch_map_store_hash",
+    # "tsl_robin_map_store_hash",
+    # "folly_f14fastmap"
     "google_dense_hash_map",
-    "qt_qhash",
-    "tsl_sparse_map",
-    "tsl_hopscotch_map",
-    "tsl_robin_map",
     "tsl_hopscotch_map_store_hash",
     "tsl_robin_map_store_hash",
+    "tsl_ordered_map",
+    "folly_f14fastmap",
 ]
 
 chart_data = {}
