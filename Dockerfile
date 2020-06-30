@@ -14,7 +14,8 @@ RUN cd /tmp && \
     export LC_ALL=C.UTF-8 && \
     export LANG=C.UTF-8 && \
     make html && \
-    mv index.html /var/www/html/
+    mv index.html /var/www/html/ \
+    mv *.js /var/www/html/
 
 EXPOSE 80
 
